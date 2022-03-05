@@ -1,0 +1,29 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    font-size: 1.3rem;
+    display: flex;
+    justify-content: space-between;
+    margin: 0.5em 1.5em;
+}
+
+/* .questionBox {
+margin: auto;
+display: flex;
+justify-content: center;
+}
+
+.questionBox .questionText {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.questionBox .questionAnswer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+} */
