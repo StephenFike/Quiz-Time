@@ -13,19 +13,22 @@
 
     <header>
         <h2><a href="">View High Scores!</a></h2>
-        <h2>TIMER HERE</h2>
+        <h2 id="countdownTimer"></h2>
     </header>
     
-    <div class="container">
+    <div class="container bg-info">
         <div class="questionBox container">
-            <div class="questionText row d-flex justify-content-start"><h2>question</h2></div>
+            <div class="row d-flex justify-content-start"><h2 class="questionText d-flex justify-content-center">Question</h2></div>
 
             <div class="row d-flex justify-content-start">
-                <button class="questionAnswer col-3 bg-gradient bg-dark text-light">Answer1</button>
-                <button class="questionAnswer col-3 bg-gradient bg-dark text-light">Answer2</button>
-                <button class="questionAnswer col-3 bg-gradient bg-dark text-light">Answer3</button>
-                <button class="questionAnswer col-3 bg-gradient bg-dark text-light">Answer4</button>
+                <button class="answerChoice col-12 bg-gradient bg-dark text-light rounded m-1 d-flex justify-content-center" id="btn-0" >Answer1</button>
+                <button class="answerChoice col-12 bg-gradient bg-dark text-light rounded m-1 d-flex justify-content-center" id="btn-1" >Answer2</button>
+                <button class="answerChoice col-12 bg-gradient bg-dark text-light rounded m-1 d-flex justify-content-center" id="btn-2" >Answer3</button>
             </div>
+        </div>
+
+        <div class="answerButtonContainer container d-flex justify-content-center">
+            <button class="startQuizBtn rounded p-1 m-1">START QUIZ!</button>
         </div>
     </div>
 
