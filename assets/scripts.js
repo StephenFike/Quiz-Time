@@ -14,7 +14,7 @@ var answerChoiceEl = document.querySelectorAll('.answerChoice');
 var answerOneEl = document.getElementById('btn-0');
 var answerTwoEl = document.getElementById('btn-1');
 var answerThreeEl = document.getElementById('btn-2');
-var answerBtnContainerEl = document.querySelector('.answerButtonContainer');
+var answerChoiceContainerEl = document.querySelector('.answerChoiceContainer');
 var number = 0;
 var timeLeft = 40;
 var finalScore = "";
@@ -97,9 +97,15 @@ function checkAnswer(el) {
 
 function quizEnd() {
     questionTextEl.innerHTML = "Thanks for taking the quiz! Your score was " + timeLeft + "!";
+    timerEl.remove();
     answerOneEl.remove();
     answerTwoEl.remove();
     answerThreeEl.remove();
+
+    var nameInput = document.createElement('input')
+    nameInput.placeholder = "Input your name!"
+    
+    answerChoiceContainerEl.appendChild(nameInput);
 }
 
 
