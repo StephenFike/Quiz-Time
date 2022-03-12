@@ -16,6 +16,7 @@ var answerTwoEl = document.getElementById('btn-1');
 var answerThreeEl = document.getElementById('btn-2');
 var answerBtnContainerEl = document.querySelector('.answerButtonContainer');
 var number = 0;
+var timeLeft = 40;
 var finalScore = "";
 var questions = [
     {
@@ -49,13 +50,13 @@ var questions = [
 
 // Question / Answer inputs
 function nextQuestion() {
-    if (number < 3){
+    if (number < 2){
         number++;
         questionTextEl.innerHTML = questions[number].question;
         answerOneEl.innerHTML = questions[number].answers.a
         answerTwoEl.innerHTML = questions[number].answers.b
         answerThreeEl.innerHTML = questions[number].answers.c
-    } else if (number == 3){
+    } else if (number >=2 ){
         quizEnd();
     }
 }
@@ -69,7 +70,6 @@ function startQuiz() {
 
 // Timer countdown
 function timerCountdown() {
-    var timeLeft = 50
     var timeInterval = setInterval(function() {
         if (timeLeft >= 1) {
             timerEl.textContent = "Time left: " + timeLeft ;
@@ -89,13 +89,14 @@ function checkAnswer(el) {
     if(el.innerHTML == questions[number].correctAnswer) {
         console.log("FUNCTION IS WORKING");
     } else {
-        console.log("NOT CORRECT ANSWER")
+        timeLeft = timeLeft - 10;
+        console.log("NOT CORRECT ANSWER");
     }
     nextQuestion();
 }
 
 function quizEnd() {
-    questionTextEl.innerHTML = "Thanks for taking the quiz! Your score was " + finalScore + "!";
+    questionTextEl.innerHTML = "Thanks for taking the quiz! Your score was " + timeLeft + "!";
     answerOneEl.remove();
     answerTwoEl.remove();
     answerThreeEl.remove();
