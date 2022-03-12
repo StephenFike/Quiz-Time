@@ -1,7 +1,7 @@
 // TO DO:
 // COUNTDOWN TIMER --
-// START QUIZ BUTTON
-// DYNAMIC CREATION OF QUESTIONS
+// START QUIZ BUTTON --
+// DYNAMIC CREATION OF QUESTIONS --
 // END QUIZ AFTER LAST QUESTION OR TIMER REACHES 0
 // STORE SCORE AND NAME INPUT
 // RETAKE QUIZ OR HIGH SCORE PAGE
@@ -9,12 +9,14 @@
 
 var timerEl = document.getElementById('countdownTimer');
 var startQuizBtnEl = document.querySelector('.startQuizBtn');
-var answerBtnEl = document.querySelector('.answerChoice');
 var questionTextEl = document.querySelector('.questionText');
-var answerChoiceEl = document.querySelector('.answerChoice');
-var answerBtnContainerEl = document.querySelector('.answerButtonContainer')
+var answerChoiceEl = document.querySelectorAll('.answerChoice');
+var answerOneEl = document.getElementById('btn-0');
+var answerTwoEl = document.getElementById('btn-1');
+var answerThreeEl = document.getElementById('btn-2');
+var answerBtnContainerEl = document.querySelector('.answerButtonContainer');
 var number = 0;
-var submitButtonClicked = false;
+var finalScore = "";
 var questions = [
     {
         question: "What does CSS stand for?",
@@ -45,45 +47,75 @@ var questions = [
     }
 ];
 
-
+// Question / Answer inputs
 function nextQuestion() {
+    if (number < 3){
+        number++;
+        questionTextEl.innerHTML = questions[number].question;
+        answerOneEl.innerHTML = questions[number].answers.a
+        answerTwoEl.innerHTML = questions[number].answers.b
+        answerThreeEl.innerHTML = questions[number].answers.c
+    } else if (number == 3){
+        quizEnd();
+    }
+}
+
+function startQuiz() {
     questionTextEl.innerHTML = questions[number].question;
-    number++;
+    answerOneEl.innerHTML = questions[number].answers.a
+    answerTwoEl.innerHTML = questions[number].answers.b
+    answerThreeEl.innerHTML = questions[number].answers.c
 }
 
 // Timer countdown
 function timerCountdown() {
-    var timeLeft = 75;
+    var timeLeft = 50
     var timeInterval = setInterval(function() {
-        if (timeLeft > 1) {
+        if (timeLeft >= 1) {
             timerEl.textContent = "Time left: " + timeLeft ;
             timeLeft--;
-        } else if (timeLeft == 0) {
+        } else if (timeLeft <= 0) {
             timerEl.textContent = "Out of time!";
             clearInterval(timeInterval);
+            finalScore = timeLeft;
+            quizEnd();
         }
     }, 1000)
+    
 };
 
-
-// Submit button creation
-// var submitButtonEl = document.createElement("button")
-// submitButtonEl.setAttribute("class", "startQuizBtn rounded p-1 m-1")
-// submitButtonEl.innerHTML = "Submit";
-// answerBtnContainerEl.append(submitButtonEl);
-
-
-// submitButtonEl.addEventListener('click', function(){
-//     nextQuestion();
-// })
-
-startQuizBtnEl.addEventListener('click', function(){
-    if(submitButtonClicked == false) {
-        timerCountdown();
-        nextQuestion();
-        submitButtonClicked == true;
-        startQuizBtnEl.innerHTML = 'Submit';
+function checkAnswer(el) {
+    console.log(questions[number].correctAnswer)
+    if(el.innerHTML == questions[number].correctAnswer) {
+        console.log("FUNCTION IS WORKING");
     } else {
-        nextQuestion();
+        console.log("NOT CORRECT ANSWER")
     }
-});
+    nextQuestion();
+}
+
+function quizEnd() {
+    questionTextEl.innerHTML = "Thanks for taking the quiz! Your score was " + finalScore + "!";
+    answerOneEl.remove();
+    answerTwoEl.remove();
+    answerThreeEl.remove();
+}
+
+
+// Start quiz button
+startQuizBtnEl.addEventListener('click', function(){
+        timerCountdown();
+        startQuiz();
+        startQuizBtnEl.remove();
+    });
+
+for  (iterator of answerChoiceEl) {
+        (function(iterator){
+
+            iterator.addEventListener('click', function() {
+                checkAnswer(iterator);
+            });
+       })(iterator)
+        
+    }
+
